@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hiking Adventures</title>
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← My Resume</a>
+        
+        <h1>My Passion for Hiking</h1>
+        
+        <nav class="toc">
+            <h3>Quick Navigation</h3>
+            <ul>
+                <li><a href="#everest">Featured Trek: Everest Base Camp</a></li>
+                <li><a href="#best-hikes">Best Hikes Around the World</a></li>
+            </ul>
+        </nav>
+        
+        <p>I absolutely love hiking! There's nothing quite like getting out on the trails, breathing in the fresh mountain air, and experiencing the beauty of nature. Whether it's a leisurely day hike or a challenging multi-day trek, I'm always eager to explore new trails and push my limits.</p>
+        
+        <div class="image-container">
+            <img src="assets/img/sam.jpeg" alt="Mountain hiking adventure" class="hiking-image">
+        </div>
+        
+        <h2 id="everest">Featured Trek: Everest Base Camp</h2>
+        <p>One of my dream hikes is the trek to Everest Base Camp. Here's an inspiring video about this incredible journey:</p>
+        
+        <div class="video-container">
+            <div class="ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/xngSQ6wcUAA" title="Trek to Everest Base Camp" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <h2 id="best-hikes">Best Hikes Around the World</h2>
+        <p>Here are some of the most incredible hikes I aspire to complete:</p>
+        
+        <ol>
+            <li>Everest Base Camp Trek
+                <ul>
+                    <li>Location: Nepal</li>
+                    <li>Distance: 64 km round trip</li>
+                    <li>Difficulty: Moderate to Strenuous</li>
+                    <li>Duration: 12-14 days</li>
+                </ul>
+            </li>
+            <li>Inca Trail to Machu Picchu
+                <ul>
+                    <li>Location: Peru</li>
+                    <li>Distance: 43 km</li>
+                    <li>Difficulty: Moderate</li>
+                    <li>Duration: 4 days</li>
+                </ul>
+            </li>
+            <li>Torres del Paine Circuit
+                <ul>
+                    <li>Location: Patagonia, Chile</li>
+                    <li>Distance: 50-80 km</li>
+                    <li>Difficulty: Strenuous</li>
+                    <li>Duration: 8-10 days</li>
+                </ul>
+            </li>
+            <li>GR20 Trail
+                <ul>
+                    <li>Location: Corsica, France</li>
+                    <li>Distance: 170 km</li>
+                    <li>Difficulty: Very Strenuous</li>
+                    <li>Duration: 15-16 days</li>
+                </ul>
+            </li>
+            <li>Mount Kilimanjaro
+                <ul>
+                    <li>Location: Tanzania</li>
+                    <li>Distance: 68 km round trip</li>
+                    <li>Difficulty: Moderate</li>
+                    <li>Duration: 6-8 days</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <p>Each of these hikes offers unique landscapes, cultural experiences, and personal challenges. I'm committed to conquering these trails and creating unforgettable memories along the way!</p>
+        
+        <h2 style="margin-top: 40px;">Trail Comparison Dashboard</h2>
+        <p>Interactive visualization of the best hikes around the world:</p>
+        
+        <div style="margin: 30px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h3>Distance vs Duration by Trail</h3>
+            <canvas id="trailChart" style="max-width: 100%;"></canvas>
+        </div>
+        
+        <div style="margin: 30px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h3>Difficulty Level Breakdown</h3>
+            <canvas id="difficultyChart" style="max-width: 100%;"></canvas>
+        </div>
+        
+        <div style="margin: 30px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h3>Interactive Trail Selector</h3>
+            <label for="trailSelect">Choose a trail:</label>
+            <select id="trailSelect" style="padding: 8px; margin: 10px 0; border-radius: 4px; border: 1px solid #ccc;">
+                <option value="">-- Select a trail --</option>
+                <option value="everest">Everest Base Camp Trek</option>
+                <option value="inca">Inca Trail to Machu Picchu</option>
+                <option value="torres">Torres del Paine Circuit</option>
+                <option value="gr20">GR20 Trail</option>
+                <option value="kilimanjaro">Mount Kilimanjaro</option>
+            </select>
+            <div id="trailInfo" style="margin-top: 15px; padding: 15px; background-color: white; border-radius: 4px; display: none;">
+                <h4 id="trailName"></h4>
+                <p><strong>Location:</strong> <span id="trailLocation"></span></p>
+                <p><strong>Distance:</strong> <span id="trailDistance"></span></p>
+                <p><strong>Difficulty:</strong> <span id="trailDifficulty"></span></p>
+                <p><strong>Duration:</strong> <span id="trailDuration"></span></p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+            <a href="hiking-jokes.html" class="jokes-link">Need a laugh? Check out Hiking Jokes →</a>
+        </div>
+    </div>
+
+    <script>
+        // Trail data
+        const trails = {
+            everest: {
+                name: 'Everest Base Camp Trek',
+                location: 'Nepal',
+                distance: 64,
+                difficulty: 'Moderate to Strenuous',
+                duration: 13
+            },
+            inca: {
+                name: 'Inca Trail to Machu Picchu',
+                location: 'Peru',
+                distance: 43,
+                difficulty: 'Moderate',
+                duration: 4
+            },
+            torres: {
+                name: 'Torres del Paine Circuit',
+                location: 'Patagonia, Chile',
+                distance: 65,
+                difficulty: 'Strenuous',
+                duration: 9
+            },
+            gr20: {
+                name: 'GR20 Trail',
+                location: 'Corsica, France',
+                distance: 170,
+                difficulty: 'Very Strenuous',
+                duration: 15.5
+            },
+            kilimanjaro: {
+                name: 'Mount Kilimanjaro',
+                location: 'Tanzania',
+                distance: 68,
+                difficulty: 'Moderate',
+                duration: 7
+            }
+        };
+
+        // Trail Comparison Chart
+        const trailCtx = document.getElementById('trailChart').getContext('2d');
+        new Chart(trailCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Distance (km) vs Duration (days)',
+                        data: [
+                            {x: 64, y: 13, label: 'Everest'},
+                            {x: 43, y: 4, label: 'Inca Trail'},
+                            {x: 65, y: 9, label: 'Torres del Paine'},
+                            {x: 170, y: 15.5, label: 'GR20'},
+                            {x: 68, y: 7, label: 'Kilimanjaro'}
+                        ],
+                        borderColor: '#2c5f2d',
+                        backgroundColor: 'rgba(44, 95, 45, 0.5)',
+                        fill: true,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const data = context.raw;
+                                return data.label + ': ' + data.x + ' km, ' + data.y + ' days';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Distance (km)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Duration (days)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Difficulty Chart
+        const difficultyCtx = document.getElementById('difficultyChart').getContext('2d');
+        new Chart(difficultyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Everest', 'Inca Trail', 'Torres del Paine', 'GR20', 'Kilimanjaro'],
+                datasets: [{
+                    label: 'Difficulty Level',
+                    data: [4, 2, 4, 5, 2],
+                    backgroundColor: ['#e8f5e9', '#c8e6c9', '#a5d6a7', '#81c784', '#66bb6a'],
+                    borderColor: '#2c5f2d',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5,
+                        ticks: {
+                            callback: function(value) {
+                                const levels = ['', 'Easy', 'Moderate', 'Hard', 'Strenuous', 'Very Strenuous'];
+                                return levels[value] || value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive Trail Selector
+        const trailSelect = document.getElementById('trailSelect');
+        const trailInfo = document.getElementById('trailInfo');
+
+        trailSelect.addEventListener('change', (e) => {
+            if (e.target.value) {
+                const trail = trails[e.target.value];
+                document.getElementById('trailName').textContent = trail.name;
+                document.getElementById('trailLocation').textContent = trail.location;
+                document.getElementById('trailDistance').textContent = trail.distance + ' km';
+                document.getElementById('trailDuration').textContent = trail.duration + ' days';
+                document.getElementById('trailDifficulty').textContent = trail.difficulty;
+                trailInfo.style.display = 'block';
+            } else {
+                trailInfo.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

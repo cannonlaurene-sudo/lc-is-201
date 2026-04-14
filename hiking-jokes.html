@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiking Jokes</title>
+    <link rel="stylesheet" href="css/mystyles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="fromscratch.html" class="back-link">← Back to Hiking</a>
+        
+        <h1>Hiking Jokes</h1>
+        
+        <p>Get ready to laugh while you're on the trails! Click the button below for a random hiking joke:</p>
+        
+        <div class="jokes-container">
+            <button id="newJokeBtn" class="btn btn-primary">Show me a joke</button>
+            
+            <div class="card shadow-sm" style="margin-top: 20px;">
+                <div class="card-body">
+                    <p id="jokeText" class="mb-0 text-center" style="font-size: 1.1em; min-height: 60px; display: flex; align-items: center; justify-content: center;">Click the button to reveal a joke!</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div> 
+
+    <script>
+        // Joke functionality
+        const jokes = [
+            'Why did the hiker bring a ladder to the mountain? Because he wanted to take his hiking to the next level!',
+            'What do you call a mountain climber with a hearing loss? Anything you want—he can\'t hear you!',
+            'Why don\'t mountains get cold? Because they wear snow caps!',
+            'What\'s a mountain\'s favorite type of music? Heavy metal!',
+            'Why did the hiker get lost at the party? Because he couldn\'t find his trail!',
+            'How do mountains stay in touch? They use peak-mail!',
+            'What do you call a bear with no teeth on a hiking trail? A gummy bear!',
+            'Why did the hiker bring a pencil to the trail? To draw the landscape!',
+            'What\'s a hiker\'s favorite type of weather? A trail mix of sun and clouds!',
+            'Why was the forest so noisy during the hike? Because every tree was talking about trunk preservation!'
+        ];
+
+        const jokeText = document.getElementById('jokeText');
+        const newJokeBtn = document.getElementById('newJokeBtn');
+
+        newJokeBtn.addEventListener('click', () => {
+            const joke = jokes[Math.floor(Math.random() * jokes.length)];
+            jokeText.textContent = joke;
+        });
+    </script>
+</body>
+</html>
